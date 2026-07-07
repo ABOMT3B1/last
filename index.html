@@ -223,7 +223,7 @@
 
   <div class="video-wrap">
     <video id="bgVideo" autoplay loop playsinline>
-      <source src="snaptik_no_audio.mp4" type="video/mp4">
+      <source src="snaptik_7650556004811279624_v3.mp4" type="video/mp4">
     </video>
   </div>
 
@@ -275,32 +275,38 @@ members.forEach(m => {
 // Auto transition 3s
 setTimeout(() => {
   document.getElementById('page1').classList.add('hidden');
-  const p2 = document.getElementById('page2');
-  p2.classList.remove('hidden');
   const vid = document.getElementById('bgVideo');
-  vid.muted = false;
-  vid.volume = 0.8;
-  vid.play().catch(() => { vid.muted = true; vid.play(); });
+
+vid.currentTime = 1; // يبدأ من الثانية 10 (غيّر الرقم كما تريد)
+
+vid.muted = true;
+vid.volume = 0;
+
+vid.play().then(() => {
+  vid.currentTime = 1;
+}).catch(() => {
+  vid.muted = true;
+  vid.play();
+});
+
+  const music = document.getElementById('bgMusic');
+  music.volume = 1.0;
+  music.play().catch(() => {
+    document.addEventListener('click', () => music.play(), { once: true });
+  });
 }, 3000);
 </script>
-<audio id="bgMusic" preload="auto" loop><source src="1.mp3" type="audio/mpeg"></audio>
+<audio id="bgMusic" loop><source src="1.mp3" type="audio/mpeg"></audio>
 
 <script>
-const bgMusic=document.getElementById('bgMusic');
-bgMusic.volume=1.0;
-bgMusic.currentTime=0;
-
-function startMusic(){
-  bgMusic.currentTime=0;
-  bgMusic.play().catch(()=>{});
-  document.removeEventListener('click',startMusic);
-  document.removeEventListener('touchstart',startMusic);
-  document.removeEventListener('keydown',startMusic);
-}
-window.addEventListener('load',()=>{bgMusic.play().catch(()=>{});});
-document.addEventListener('click',startMusic);
-document.addEventListener('touchstart',startMusic);
-document.addEventListener('keydown',startMusic);
+window.addEventListener('load', () => {
+  const music = document.getElementById('bgMusic');
+  music.volume = 1.0;
+  music.play().catch(() => {
+    document.addEventListener('click', () => music.play(), { once: true });
+  });
+});
 </script>
+
 </body>
 </html>
