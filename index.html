@@ -223,7 +223,7 @@
 
   <div class="video-wrap">
     <video id="bgVideo" autoplay loop playsinline>
-      <source src="snaptik_7650556004811279624_v3.mp4" type="video/mp4">
+      <source src="1234.mp4" type="video/mp4">
     </video>
   </div>
 
@@ -275,19 +275,14 @@ members.forEach(m => {
 // Auto transition 3s
 setTimeout(() => {
   document.getElementById('page1').classList.add('hidden');
+  const p2 = document.getElementById('page2');
+  p2.classList.remove('hidden');
+
   const vid = document.getElementById('bgVideo');
-
-vid.currentTime = 1; // يبدأ من الثانية 10 (غيّر الرقم كما تريد)
-
-vid.muted = true;
-vid.volume = 0;
-
-vid.play().then(() => {
   vid.currentTime = 1;
-}).catch(() => {
   vid.muted = true;
+  vid.volume = 0;
   vid.play();
-});
 
   const music = document.getElementById('bgMusic');
   music.volume = 1.0;
